@@ -1,4 +1,5 @@
 import PdfRenderer from "@/components/PdfRenderer"
+import ChatWrapper from "@/components/chat/ChatWrapper"
 import { db } from "@/db"
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server"
 import { notFound, redirect } from "next/navigation"
@@ -38,7 +39,7 @@ const FileIdPage = async ({ params }: FileIdPageProps) => {
       </div>
 
       <div className='shrink-0 flex-[0.75] border-t border-gray-200 lg:w-96 lg:border-l lg:border-t-0'>
-        {/* <ChatWrapper isSubscribed={plan.isSubscribed} fileId={file.id} /> */}
+        <ChatWrapper fileId={file.id} />
       </div>
     </div>
   </div>
