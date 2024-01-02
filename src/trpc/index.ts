@@ -8,7 +8,7 @@ import { absoluteUrl } from '@/lib/utils';
 import { getUserSubscriptionPlan, stripe } from '@/lib/stripe';
 import { PLANS } from '@/config/stripe';
 
-export const appRouter = router ({
+export const appRouter = router({
   //------------------------------//CREATE THE KINDEAUTH USER IN THE DATABASE//--------------------//
    authCallback: publicProcedure.query(async () => {
      const { getUser } = getKindeServerSession()
