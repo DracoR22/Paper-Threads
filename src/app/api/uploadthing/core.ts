@@ -61,20 +61,29 @@ const onUploadComplete = async ({ metadata, file }: {
 
     const { subscriptionPlan } = metadata
     const { isSubscribed } = subscriptionPlan
+    console.log(pagesAmt)
 
     const isProExceeded = pagesAmt > PLANS.find((plan) => plan.name === "Pro")!.pagesPerPdf
     const isFreeExceeded = pagesAmt > PLANS.find((plan) => plan.name === "Free")!.pagesPerPdf
 
+    console.log(isFreeExceeded)
+
     if ((isSubscribed && isProExceeded) || (!isSubscribed && isFreeExceeded)) {
-      await db.file.update({
-        where: {
-          id: createdFile.id
-        },
-        data: {
-          uploadStatus: "FAILED"
-        }
-      })
+      try {
+        await db.file.update({
+          data: {
+            uploadStatus: "FAILED",
+          },
+          where: {
+            id: createdFile.id,
+          },
+        });
+        console.log("File updated successfully");
+      } catch (error) {
+        console.error("Error updating file:", error);
+      }
     }
+    
 
     // vectorize and index entire document
     const pineconeIndex = pinecone.Index("paper-threads")
