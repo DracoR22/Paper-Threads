@@ -8,6 +8,8 @@ import { PineconeStore } from "langchain/vectorstores/pinecone"
 import { openai } from "@/lib/openai";
 import { OpenAIStream, StreamingTextResponse } from "ai"
 
+export const runtime = "edge";
+
 export const POST = async (req: NextRequest) => {
     // Endpoint to asking a question to the PDF file
     const body = await req.json()
